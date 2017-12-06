@@ -1,4 +1,9 @@
 var $ = function (id) {
+
+    const RECYCLE_BIN_ID = "recycleBin";
+    const  FULL_RECYCLE_BIN_IMG_PATH = "images/full.png";
+    var recyleBin = document.getElementById(RECYCLE_BIN_ID);
+    
     if (id) {
 
         // return a new $ object if scope is window
@@ -11,8 +16,8 @@ var $ = function (id) {
         // find element by id
         self.obj = document.getElementById(id);
 
-        // determine if selected element is a recycle bin
-        self.isRecyleBin = (id === "recycleBin") ? true : false;
+        // determine if element is a recycle bin
+        self.isRecyleBin = (id === RECYCLE_BIN_ID) ? true : false;
 
         // by default element is not clicked yet
         self.isClicked = false;
@@ -23,6 +28,7 @@ var $ = function (id) {
         // adding listener on mousedown
         self.obj.addEventListener("mousedown", function (e) {
             var clickedElement = this;
+
             // if element is not draggable not add mosemove listener
             if (clickedElement.draggable === false) return;
 
@@ -57,11 +63,13 @@ var $ = function (id) {
 
                 // if selected element is not a recycle bin
                 if (!self.isRecyleBin) {
-                    var recyleBin = document.getElementById("recycleBin");
+
                     // checking if mouseup is on recyleBin element or not
                     if (e.target === recyleBin) {
+                        // remove element
                         clickedElement.parentNode.removeChild(clickedElement);
-                        recyleBin.setAttribute("src", "images/full.png");
+                        // change recycle bin image to be full
+                        recyleBin.setAttribute("src", FULL_RECYCLE_BIN_IMG_PATH);
                     }
                 }
 
@@ -70,7 +78,7 @@ var $ = function (id) {
                 document.removeEventListener("mouseup", mouseupHandler);
             }
 
-            return this;
+            return clickedElement;
         });
 
         return self;
@@ -175,3 +183,5 @@ $("recycleBin").style({
     "position": "absolute"
 })
     .setDraggable(true);
+
+
