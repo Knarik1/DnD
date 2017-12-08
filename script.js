@@ -1,9 +1,9 @@
 var $ = function (id) {
 
     const RECYCLE_BIN_ID = "recycleBin";
-    const  FULL_RECYCLE_BIN_IMG_PATH = "images/full.png";
+    const FULL_RECYCLE_BIN_IMG_PATH = "images/full.png";
     var recyleBin = document.getElementById(RECYCLE_BIN_ID);
-    
+
     if (id) {
 
         // return a new $ object if scope is window
@@ -15,9 +15,6 @@ var $ = function (id) {
 
         // find element by id
         self.obj = document.getElementById(id);
-
-        // determine if element is a recycle bin
-        self.isRecyleBin = (id === RECYCLE_BIN_ID) ? true : false;
 
         // by default element is not clicked yet
         self.isClicked = false;
@@ -62,7 +59,7 @@ var $ = function (id) {
                 self.isClicked = false;
 
                 // if selected element is not a recycle bin
-                if (!self.isRecyleBin) {
+                if (self.obj !== recyleBin) {
 
                     // checking if mouseup is on recyleBin element or not
                     if (e.target === recyleBin) {
@@ -87,7 +84,6 @@ var $ = function (id) {
     }
 };
 
-
 $.prototype = {
     setDraggable: function (state) {
         this.obj.draggable = state;
@@ -102,6 +98,8 @@ $.prototype = {
 };
 
 
+
+
 $("myDiv").style({
     "border": "2px solid black",
     "width": "100px",
@@ -112,7 +110,6 @@ $("myDiv").style({
     "background-color": "yellow"
 })
     .setDraggable(true);
-
 
 $("myDiv1").style({
     "border": "2px solid black",
@@ -125,7 +122,6 @@ $("myDiv1").style({
     "background-color": "pink"
 })
     .setDraggable(true);
-
 
 $("myDiv2").style({
     "border": "2px solid black",
@@ -174,7 +170,6 @@ $("myDiv5").style({
 })
     .setDraggable(true);
 
-
 $("recycleBin").style({
     "width": "100px",
     "height": "100px",
@@ -183,5 +178,4 @@ $("recycleBin").style({
     "position": "absolute"
 })
     .setDraggable(true);
-
 
